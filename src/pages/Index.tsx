@@ -12,21 +12,21 @@ const TRAITS: Trait[] = [
     id: "orb",
     name: "Floating Companion Orb",
     tier: "Engagement Tier 3",
-    requirement: "21 days active",
+    requirement: "21 days engagement",
     eligible: true,
   },
   {
     id: "teeth",
     name: "Golden Teeth",
     tier: "Engagement Tier 2",
-    requirement: "21 days active",
+    requirement: "21 days engagement",
     eligible: true,
   },
   {
     id: "sword",
     name: "Sword",
     tier: "Engagement Tier 1",
-    requirement: "21 days active",
+    requirement: "21 days engagement",
     eligible: true,
   },
   {
@@ -61,14 +61,14 @@ const TRAITS: Trait[] = [
     id: "shoulder-pads",
     name: "Mechanical Shoulder Pads",
     tier: "Flags Tier 2",
-    requirement: "score≥0.6 + power",
+    requirement: "Neynar score > 0.6 + power badge",
     eligible: true,
   },
   {
     id: "laser-eyes",
     name: "Laser Eyes",
     tier: "Flags Tier 1",
-    requirement: "score≥0.8 + pro",
+    requirement: "Neynar score > 0.8 + pro badge",
     eligible: true,
   },
 ];
@@ -76,9 +76,10 @@ const TRAITS: Trait[] = [
 const MAX_TRAITS = 4;
 
 const Index = () => {
-  const [fid, setFid] = useState("");
+  const [fid] = useState("123456"); // FID will be automatically fetched
   const [selectedTraits, setSelectedTraits] = useState<Set<string>>(new Set());
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [hasGeneratedPreview, setHasGeneratedPreview] = useState(false);
 
   const handleTraitToggle = (traitId: string) => {
     setSelectedTraits((prev) => {
@@ -95,18 +96,19 @@ const Index = () => {
   };
 
   const handleGeneratePreview = () => {
-    if (!fid) {
-      toast.error("Please enter your FID");
-      return;
-    }
     if (selectedTraits.size === 0) {
       toast.error("Please select at least one trait");
       return;
     }
+    setHasGeneratedPreview(true);
     setPreviewOpen(true);
   };
 
   const handleMint = () => {
+    if (!hasGeneratedPreview) {
+      toast.error("Please generate a preview first");
+      return;
+    }
     toast.success("Minting your Degen NFT...", {
       description: `FID #${fid} with ${selectedTraits.size} traits`,
     });
@@ -130,24 +132,12 @@ const Index = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-3 gradient-primary bg-clip-text text-transparent">
             The Degens
           </h1>
-          <p className="text-muted-foreground text-sm md:text-base">
+          <p className="text-muted-foreground text-sm md:text-base mb-4">
             Customize and mint your unique Degen NFT
           </p>
-        </div>
-
-        {/* FID Input */}
-        <div className="mb-8">
-          <label htmlFor="fid" className="block text-sm font-medium mb-2 text-muted-foreground">
-            Farcaster ID (FID)
-          </label>
-          <Input
-            id="fid"
-            type="number"
-            placeholder="Enter your FID..."
-            value={fid}
-            onChange={(e) => setFid(e.target.value)}
-            className="h-12 text-base glass-card"
-          />
+          <Badge variant="outline" className="text-sm px-4 py-2">
+            FID #{fid}
+          </Badge>
         </div>
 
         {/* Trait Selection Header */}
@@ -175,24 +165,25 @@ const Index = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid gap-4">
           <Button
-            variant="outline"
+            variant="neon"
             size="lg"
             onClick={handleGeneratePreview}
-            className="h-12 text-base"
+            className="h-12 text-base w-full"
           >
             <Eye className="w-5 h-5 mr-2" />
             Generate Preview
           </Button>
           <Button
-            variant="neon"
+            variant="outline"
             size="lg"
-            onClick={handleGeneratePreview}
-            className="h-12 text-base"
+            onClick={handleMint}
+            disabled={!hasGeneratedPreview}
+            className="h-12 text-base w-full"
           >
             <Sparkles className="w-5 h-5 mr-2" />
-            Preview & Mint
+            Mint NFT
           </Button>
         </div>
       </div>
