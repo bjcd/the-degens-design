@@ -129,11 +129,11 @@ const Index = () => {
       <div className="relative z-10 container max-w-2xl mx-auto px-4 py-8 md:py-12">
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-3 gradient-primary bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-primary-glow bg-clip-text text-transparent animate-fade-in drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]">
             The Degens
           </h1>
-          <p className="text-muted-foreground text-sm md:text-base mb-4">
-            Customize and mint your unique Degen NFT
+          <p className="text-foreground/90 text-base md:text-lg mb-4 font-medium">
+            Customize and mint your unique The Degens NFT
           </p>
           <Badge variant="outline" className="text-sm px-4 py-2">
             FID #{fid}
