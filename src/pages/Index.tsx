@@ -6,6 +6,7 @@ import { TraitCard, type Trait } from "@/components/TraitCard";
 import { PreviewModal } from "@/components/PreviewModal";
 import { Eye, Sparkles } from "lucide-react";
 import { toast } from "sonner";
+import degenExample from "@/assets/degen-example.png";
 
 const TRAITS: Trait[] = [
   {
@@ -124,6 +125,14 @@ const Index = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/20 rounded-full blur-[120px] animate-pulse delay-1000" />
+        {/* Degen character showcase */}
+        <div className="absolute top-1/2 right-8 -translate-y-1/2 hidden lg:block opacity-30 hover:opacity-50 transition-opacity duration-500">
+          <img 
+            src={degenExample} 
+            alt="Example Degen NFT" 
+            className="w-80 h-80 object-contain animate-float"
+          />
+        </div>
       </div>
 
       <div className="relative z-10 container max-w-2xl mx-auto px-4 py-8 md:py-12">
