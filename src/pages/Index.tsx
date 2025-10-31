@@ -142,11 +142,16 @@ const Index = () => {
 
         {/* Description */}
         <div className="mb-6 p-4 glass-card rounded-lg">
-          <p className="text-foreground/80 text-sm md:text-base leading-relaxed">
-            The Degens NFTs are first derived from your profile picture. You can attempt to increase their rarity based on your social graph. Your past engagement, number of followers, degen holdings, Farcaster badges and Neynar score unlock traits you can use to play the rarity game. Will your traits be scarcer than a common? That's your call ultimately!
+          <p className="text-foreground/80 text-sm md:text-base leading-relaxed mb-3">
+            Each Degen NFT is born from your social graph and profile picture.
+            Want to make yours rarer? Boost your standing before minting: engagement, followers, DEGEN holdings, Farcaster badges, and Neynar score all unlock special traits.
           </p>
-          <p className="text-muted-foreground text-xs md:text-sm mt-3 italic">
-            Note: common generations without traits are more faithful to your original profile picture.
+          <p className="text-foreground/80 text-sm md:text-base leading-relaxed mb-3">
+            Will you settle for a common, or chase legendary status? The rarity game is yours to play.
+          </p>
+          <p className="text-muted-foreground text-xs md:text-sm italic">
+            Note: Common Degens mirror your profile picture most faithfully.
+            Trait eligibility updates in real time — you can keep improving your odds until you start your generation.
           </p>
         </div>
 
