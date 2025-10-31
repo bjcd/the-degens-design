@@ -140,6 +140,16 @@ const Index = () => {
           </Badge>
         </div>
 
+        {/* Description */}
+        <div className="mb-6 p-4 glass-card rounded-lg">
+          <p className="text-foreground/80 text-sm md:text-base leading-relaxed">
+            The Degens NFTs are first derived from your profile picture. You can attempt to increase their rarity based on your social graph. Your past engagement, number of followers, degen holdings, Farcaster badges and Neynar score unlock traits you can use to play the rarity game. Will your traits be scarcer than a common? That's your call ultimately!
+          </p>
+          <p className="text-muted-foreground text-xs md:text-sm mt-3 italic">
+            Note: common generations without traits are more faithful to your original profile picture.
+          </p>
+        </div>
+
         {/* Trait Selection Header */}
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Select Up to 4 Traits</h2>
@@ -152,7 +162,7 @@ const Index = () => {
         </div>
 
         {/* Traits Grid */}
-        <div className="grid gap-3 mb-8">
+        <div className="grid grid-cols-2 gap-3 mb-8">
           {TRAITS.map((trait) => (
             <TraitCard
               key={trait.id}
