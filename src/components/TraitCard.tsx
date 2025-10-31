@@ -32,7 +32,7 @@ export const TraitCard = ({ trait, isSelected, onToggle, disabled }: TraitCardPr
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-foreground mb-1 truncate">{trait.name}</h3>
+          <h3 className="font-semibold text-foreground mb-1">{trait.name}</h3>
           <p className="text-xs text-muted-foreground mb-2">{trait.requirement}</p>
           <Badge variant={trait.eligible ? "success" : "locked"} className="text-[10px]">
             {trait.tier}
