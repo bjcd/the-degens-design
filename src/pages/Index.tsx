@@ -81,6 +81,7 @@ const Index = () => {
   const [selectedTraits, setSelectedTraits] = useState<Set<string>>(new Set());
   const [previewOpen, setPreviewOpen] = useState(false);
   const [hasGeneratedPreview, setHasGeneratedPreview] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleTraitToggle = (traitId: string) => {
     setSelectedTraits((prev) => {
@@ -101,8 +102,14 @@ const Index = () => {
       toast.error("Please select at least one trait");
       return;
     }
-    setHasGeneratedPreview(true);
-    setPreviewOpen(true);
+    setIsGenerating(true);
+    
+    // Simulate generation process
+    setTimeout(() => {
+      setIsGenerating(false);
+      setHasGeneratedPreview(true);
+      setPreviewOpen(true);
+    }, 2000);
   };
 
   const handleMint = () => {
@@ -186,22 +193,39 @@ const Index = () => {
           ))}
         </div>
 
+        {/* Loading State */}
+        {isGenerating && (
+          <div className="mb-8 p-6 glass-card rounded-lg space-y-4 animate-fade-in">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <Sparkles className="w-5 h-5 text-primary animate-pulse" />
+              <p className="text-lg font-semibold">Generating your Degen...</p>
+            </div>
+            <div className="w-full bg-muted/30 rounded-full h-2 overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-primary via-accent to-primary-glow animate-[shimmer_2s_ease-in-out_infinite] bg-[length:200%_100%]" />
+            </div>
+            <p className="text-sm text-muted-foreground text-center">
+              This may take a moment...
+            </p>
+          </div>
+        )}
+
         {/* Action Buttons */}
         <div className="grid gap-4">
           <Button
             variant="neon"
             size="lg"
             onClick={handleGeneratePreview}
+            disabled={isGenerating}
             className="h-12 text-base w-full"
           >
             <Eye className="w-5 h-5 mr-2" />
-            Generate Preview
+            {isGenerating ? "Generating..." : "Generate Preview"}
           </Button>
           <Button
             variant="outline"
             size="lg"
             onClick={handleMint}
-            disabled={!hasGeneratedPreview}
+            disabled={!hasGeneratedPreview || isGenerating}
             className="h-12 text-base w-full"
           >
             <Sparkles className="w-5 h-5 mr-2" />
