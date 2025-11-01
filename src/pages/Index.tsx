@@ -159,18 +159,6 @@ const Index = () => {
           </p>
         </div>
 
-        {/* Degen Example Showcase */}
-        <div className="mb-6 flex justify-center">
-          <div className="glass-card rounded-lg p-4 inline-block">
-            <img 
-              src={degenExample} 
-              alt="Example Degen NFT" 
-              className="w-48 h-48 md:w-64 md:h-64 object-contain animate-float"
-            />
-            <p className="text-xs text-muted-foreground text-center mt-2">Example Degen NFT</p>
-          </div>
-        </div>
-
         {/* Trait Selection Header */}
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Select Up to 4 Traits</h2>
