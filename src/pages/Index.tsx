@@ -3,8 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TraitCard, type Trait } from "@/components/TraitCard";
-import { PreviewModal } from "@/components/PreviewModal";
-import { Eye, Sparkles } from "lucide-react";
+import { Eye, Sparkles, X } from "lucide-react";
 import { toast } from "sonner";
 import degenExample from "@/assets/degen-example.png";
 
@@ -108,7 +107,6 @@ const Index = () => {
     setTimeout(() => {
       setIsGenerating(false);
       setHasGeneratedPreview(true);
-      setPreviewOpen(true);
     }, 2000);
   };
 
@@ -132,14 +130,6 @@ const Index = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/20 rounded-full blur-[120px] animate-pulse delay-1000" />
-        {/* Degen character showcase */}
-        <div className="absolute top-1/2 right-8 -translate-y-1/2 hidden lg:block opacity-30 hover:opacity-50 transition-opacity duration-500">
-          <img 
-            src={degenExample} 
-            alt="Example Degen NFT" 
-            className="w-80 h-80 object-contain animate-float"
-          />
-        </div>
       </div>
 
       <div className="relative z-10 container max-w-2xl mx-auto px-4 py-8 md:py-12">
@@ -167,6 +157,18 @@ const Index = () => {
           <p className="text-muted-foreground text-xs md:text-sm italic">
             Note: Common Degens mirror your profile picture most faithfully. Trait eligibility updates in real time — you can keep improving your odds until you start your generation.
           </p>
+        </div>
+
+        {/* Degen Example Showcase */}
+        <div className="mb-6 flex justify-center">
+          <div className="glass-card rounded-lg p-4 inline-block">
+            <img 
+              src={degenExample} 
+              alt="Example Degen NFT" 
+              className="w-48 h-48 md:w-64 md:h-64 object-contain animate-float"
+            />
+            <p className="text-xs text-muted-foreground text-center mt-2">Example Degen NFT</p>
+          </div>
         </div>
 
         {/* Trait Selection Header */}
@@ -209,17 +211,57 @@ const Index = () => {
           </div>
         )}
 
+        {/* Generated Preview */}
+        {hasGeneratedPreview && !isGenerating && (
+          <div className="mb-8 p-6 glass-card rounded-lg space-y-4 animate-fade-in">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold">Your Degen Preview</h3>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setHasGeneratedPreview(false)}
+                className="h-8 w-8"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+            
+            <div className="flex justify-center mb-4">
+              <img 
+                src={degenExample} 
+                alt="Your Generated Degen NFT" 
+                className="w-64 h-64 md:w-80 md:h-80 object-contain rounded-lg"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-sm font-semibold">Selected Traits:</p>
+              <div className="flex flex-wrap gap-2">
+                {selectedTraitsList.map((trait) => (
+                  <Badge key={trait.id} variant="secondary">
+                    {trait.name}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            <p className="text-xs text-muted-foreground">
+              FID #{fid} • {selectedTraits.size} traits selected
+            </p>
+          </div>
+        )}
+
         {/* Action Buttons */}
         <div className="grid gap-4">
           <Button
             variant="neon"
             size="lg"
             onClick={handleGeneratePreview}
-            disabled={isGenerating}
+            disabled={isGenerating || hasGeneratedPreview}
             className="h-12 text-base w-full"
           >
             <Eye className="w-5 h-5 mr-2" />
-            {isGenerating ? "Generating..." : "Generate Preview"}
+            {isGenerating ? "Generating..." : hasGeneratedPreview ? "Preview Generated" : "Generate Preview"}
           </Button>
           <Button
             variant="outline"
@@ -233,15 +275,6 @@ const Index = () => {
           </Button>
         </div>
       </div>
-
-      {/* Preview Modal */}
-      <PreviewModal
-        open={previewOpen}
-        onOpenChange={setPreviewOpen}
-        fid={fid}
-        selectedTraits={selectedTraitsList}
-        onMint={handleMint}
-      />
     </div>
   );
 };
