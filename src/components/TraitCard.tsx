@@ -55,7 +55,7 @@ export const TraitCard = ({ trait, isSelected, onToggle, disabled }: TraitCardPr
       
       {!trait.eligible && (
         <div className="absolute inset-0 rounded-lg bg-background/50 backdrop-blur-[2px] flex items-center justify-center">
-          <Badge variant="locked">Not eligible</Badge>
+          <Badge variant="locked">Not eligible (yet)</Badge>
         </div>
       )}
     </button>

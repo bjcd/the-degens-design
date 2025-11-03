@@ -69,7 +69,7 @@ const TRAITS: Trait[] = [
     name: "Diamond Hands",
     tier: "DEGEN Tier 1",
     requirement: "≥1M DEGEN",
-    eligible: true,
+    eligible: false,
   },
   {
     id: "shoulder-pads",
