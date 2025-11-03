@@ -24,7 +24,7 @@ const TRAITS: Trait[] = [
   },
   {
     id: "gun",
-    name: "The Gun",
+    name: "Aura",
     tier: "Warplet NFT",
     requirement: "Owns Warplet NFT",
     eligible: true,
