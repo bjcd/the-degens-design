@@ -97,10 +97,6 @@ const Index = () => {
   };
 
   const handleGeneratePreview = () => {
-    if (selectedTraits.size === 0) {
-      toast.error("Please select at least one trait");
-      return;
-    }
     setIsGenerating(true);
     
     // Simulate generation process
